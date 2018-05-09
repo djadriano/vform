@@ -167,6 +167,8 @@ class FormValidator {
     this.form.addEventListener('reset', this.onReset.bind(this));
   }
 
+  // -------------------------------------------------------------------------
+
   [setFieldsEventListener](listenerType = 'addEventListener') {
     let formFields = this.getFields();
 
