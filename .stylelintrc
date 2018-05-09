@@ -1,0 +1,45 @@
+{
+  "extends": "stylelint-config-standard",
+  "ignoreFiles": "./dist/**",
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "indentation": null,
+    "declaration-colon-space-after": "always",
+    "declaration-colon-newline-after": null,
+    "declaration-block-trailing-semicolon": "always",
+    "no-missing-end-of-source-newline": null,
+    "property-no-unknown": [ true, {
+      "ignoreProperties": [
+        "composes",
+        "font-smoothing"
+      ]
+    }],
+    "color-hex-case": "lower",
+    "order/order": [
+      "custom-properties",
+      "declarations"
+    ],
+    "order/properties-alphabetical-order": null,
+    "font-family-name-quotes": "always-unless-keyword",
+    "string-quotes": "single",
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": [
+          "global"
+        ]
+      }
+    ],
+    "declaration-empty-line-before": [ "always", { "except": ["first-nested", "after-comment", "after-declaration"] }],
+    "no-eol-whitespace": [true, {
+      ignore: ["empty-lines"]
+    }],
+    "declaration-block-no-duplicate-properties": null,
+    "block-closing-brace-newline-after": [ "always", { "ignoreAtRules": ["if", "else"] }],
+    "selector-pseudo-element-colon-notation": "single",
+    "no-descending-specificity": null
+  }
+}

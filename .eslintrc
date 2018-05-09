@@ -1,0 +1,64 @@
+{
+  "extends": ["google", "plugin:react/recommended", "prettier"],
+  "plugins": ["react", "prettier", "jsx-a11y", "compat"],
+  "settings": {
+    "polyfills": ["fetch", "promises"]
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true,
+    "es6": true
+  },
+  "rules": {
+    "strict": 0,
+    "compat/compat": 2,
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/no-find-dom-node": 0,
+    "react/no-children-prop": 0,
+    "require-jsdoc": 0,
+    "quotes": 1,
+    "global-require": "off",
+    "new-cap": [
+      "error",
+      {
+        "capIsNew": false
+      }
+    ],
+    "skipBlankLines": 0,
+    "func-call-spacing": ["error", "never"],
+    "space-before-function-paren": ["error", "never"],
+    "object-curly-spacing": ["error", "always"],
+    "multiline-ternary": 0,
+    "one-var": ["error", { "initialized": "never" }],
+    "guard-for-in": 0,
+    "no-invalid-this": 0,
+    "no-console": 0,
+    "no-debugger": 0,
+    "comma-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "array-bracket-spacing": [
+      2,
+      "always",
+      {
+        "objectsInArrays": false
+      }
+    ],
+    "no-trailing-spaces": ["error", { "skipBlankLines": true }],
+    "linebreak-style": 0
+  }
+}
