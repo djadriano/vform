@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Set private methods as a Symbol
+// ---------------------------------------------------------------
+
 const registerFormEventListeners = Symbol('registerFormEventListeners');
 const setFieldsEventListener = Symbol('setFieldsEventListener');
 const checkFieldValidity = Symbol('checkFieldValidity');
@@ -7,6 +11,10 @@ const checkFormStatus = Symbol('checkFormStatus');
 const getRadioFields = Symbol('getRadioFields');
 const getCheckboxFields = Symbol('getCheckboxFields');
 const mergeOptions = Symbol('mergeOptions');
+
+// ---------------------------------------------------------------
+// Define defaults config
+// ---------------------------------------------------------------
 
 const defaults = {
   classes: {
@@ -44,7 +52,10 @@ class FormValidator {
   onInitializedSuccess() {
     const { onInitializedSuccess } = this.defaults.events;
 
-    if (onInitializedSuccess) onInitializedSuccess();
+    if (onInitializedSuccess) {
+      onInitializedSuccess();
+      this[checkFormStatus]();
+    }
 
     this[registerFormEventListeners]();
     this[setFieldsEventListener]();
@@ -107,8 +118,9 @@ class FormValidator {
   // -------------------------------------------------------------------------
 
   update() {
-    this.setFieldsEventListener('removeEventListener');
-    this.setFieldsEventListener();
+    this[setFieldsEventListener]('removeEventListener');
+    this[setFieldsEventListener]();
+    this[checkFormStatus]();
   }
 
   // -------------------------------------------------------------------------
@@ -276,9 +288,7 @@ class FormValidator {
     formFields
       .filter(item => item.type == 'radio' && item.checked)
       .map(item => {
-        if (item.name) {
-          radioFields[item.name] = item.value;
-        }
+        if (item.name) radioFields[item.name] = item.value;
       });
 
     return radioFields;

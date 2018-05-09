@@ -39,6 +39,7 @@ const App = props => (
       minLength="4"
       required
       placeholder="Name"
+      defaultValue="foo"
     />
     <p>
       <input type="radio" name="foo" value="1" defaultChecked />Eu{' '}
