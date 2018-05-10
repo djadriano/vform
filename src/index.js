@@ -39,7 +39,7 @@ const App = props => (
       minLength="4"
       required
       placeholder="Name"
-      defaultValue="foo"
+      className="foo"
     />
     <p>
       <input type="radio" name="foo" value="1" defaultChecked />Eu{' '}
@@ -57,7 +57,7 @@ const App = props => (
       <input type="checkbox" name="bar-checkbox" value="2" /> Tu{' '}
       <input type="checkbox" name="bar-checkbox" value="3" /> Eles
     </p>
-    <button>Submit</button>
+    <button>Submit</button> <button type="reset">Reset</button>
   </form>
 );
 

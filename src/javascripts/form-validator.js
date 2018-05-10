@@ -11,6 +11,7 @@ const checkFormStatus = Symbol('checkFormStatus');
 const getRadioFields = Symbol('getRadioFields');
 const getCheckboxFields = Symbol('getCheckboxFields');
 const mergeOptions = Symbol('mergeOptions');
+const debounce = Symbol('debounce');
 
 // ---------------------------------------------------------------
 // Define defaults config
@@ -82,7 +83,6 @@ class FormValidator {
   // -------------------------------------------------------------------------
 
   onReset(evt) {
-    evt.preventDefault();
     const { onReset } = this.defaults.events;
 
     if (onReset) onReset();
@@ -216,6 +216,18 @@ class FormValidator {
               false
             );
           }
+
+          // listener when user finishes typing
+          if (
+            item.getAttribute('data-valid-on-typed') &&
+            item.getAttribute('data-valid-on-typed') === '1'
+          ) {
+            item[listenerType](
+              'input',
+              this[debounce](evt => this[checkFieldValidity](evt), 1200),
+              false
+            );
+          }
         }
       });
     }
@@ -223,7 +235,7 @@ class FormValidator {
 
   // -------------------------------------------------------------------------
 
-  [checkFieldValidity](evt) {
+  [checkFieldValidity](event) {
     event.preventDefault();
     const elField = event.target;
     const attributeToCompareElemValue = elField.getAttribute(
@@ -257,12 +269,18 @@ class FormValidator {
   [compareElemFields](currentField, fieldToCompare) {
     const elToCheckValue = document.querySelector(fieldToCompare);
 
-    if (elToCheckValue && currentField.value === elToCheckValue.value) {
-      this.setFieldValid(currentField, true);
-      this.setFieldValid(elToCheckValue, true);
+    console.log(currentField.validity);
+
+    if (elToCheckValue && currentField.validity.valueMissing) {
+      this.setFieldInvalid(currentField);
     } else {
-      this.setFieldInvalid(currentField, true);
-      this.setFieldInvalid(elToCheckValue, true);
+      if (elToCheckValue && currentField.value === elToCheckValue.value) {
+        this.setFieldValid(currentField, true);
+        this.setFieldValid(elToCheckValue, true);
+      } else {
+        this.setFieldInvalid(currentField, true);
+        this.setFieldInvalid(elToCheckValue, true);
+      }
     }
   }
 
@@ -273,10 +291,11 @@ class FormValidator {
 
     if (this.form.checkValidity()) {
       this.form.classList.add(classes.formValid);
-      this.onValid();
     } else {
       this.form.classList.remove(classes.formValid);
     }
+
+    this.onValid();
   }
 
   // -------------------------------------------------------------------------
@@ -326,6 +345,23 @@ class FormValidator {
     }
 
     return options;
+  }
+
+  // -------------------------------------------------------------------------
+
+  [debounce](func, wait, immediate) {
+    let timeout;
+    return (...funcArgs) => {
+      let args = funcArgs;
+      let later = function() {
+        timeout = null;
+        if (!immediate) func.apply(this, args);
+      };
+      let callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(this, args);
+    };
   }
 }
 
