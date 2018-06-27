@@ -1,3 +1,18 @@
 body {
   background: white;
 }
+
+input {
+  font-size: 2rem;
+  border: 2px solid;
+  padding: 1rem;
+  outline: 0;
+
+  &.form-field--valid {
+    border-color: green;
+  }
+
+  &.form-field--invalid {
+    border-color: red;
+  }
+}
