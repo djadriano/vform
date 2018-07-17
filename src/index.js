@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', event => {
       onInitializedSuccess: onInitializedSuccessForm,
       onInitializedError: onInitializedError,
       onValid: onValid,
+      onBlurFieldChecked: onBlurFieldChecked,
       onSubmit: onSubmit
     }
   });
@@ -37,7 +38,11 @@ const onInitializedError = () => {
   console.log('onInitializedError');
 };
 
-const onValid = async(formStatus, formFields) => {
+const onBlurFieldChecked = field => {
+  console.log('onBlurFieldChecked', field);
+};
+
+const onValid = async (formStatus, formFields) => {
   const bar = await formFields;
   console.log('onValid', formStatus, bar);
 };
@@ -75,7 +80,7 @@ const hello = evt => {
 
 const App = props => (
   <form className="form" noValidate>
-    <div className="ag-field">
+    <label className="ag-field">
       <input
         type="email"
         name="name"
@@ -87,23 +92,27 @@ const App = props => (
         data-error-message="Error message"
       />
       <span className="ag-field-error" />
-    </div>
+    </label>
     <p>
-      <input type="radio" name="foo" value="1" defaultChecked />Eu{' '}
-      <input type="radio" name="foo" value="2" /> Tu{' '}
+      <label className="ag-field">
+        <input type="radio" name="foo" value="1" required />Eu
+      </label>
+      <label className="ag-field">
+        <input type="radio" name="foo" value="2" /> Tu
+      </label>
       <input type="radio" name="foo" value="3" /> Eles
-      <input type="radio" name="bar" value="1" />Eu{' '}
-      <input type="radio" name="bar" value="2" /> Tu{' '}
+      <input type="radio" name="bar" value="1" />Eu <input type="radio" name="bar" value="2" /> Tu{' '}
       <input type="radio" name="bar" value="3" /> Eles
     </p>
-    <p>
-      <input type="checkbox" name="foo-checkbox" value="1" defaultChecked />Eu{' '}
-      <input type="checkbox" name="foo-checkbox" value="2" /> Tu{' '}
-      <input type="checkbox" name="foo-checkbox" value="3" /> Eles
-      <input type="checkbox" name="bar-checkbox" value="1" />Eu{' '}
-      <input type="checkbox" name="bar-checkbox" value="2" /> Tu{' '}
-      <input type="checkbox" name="bar-checkbox" value="3" /> Eles
-    </p>
+    <div>
+      <label className="ag-field">
+        <input type="checkbox" name="foo-checkbox" value="1" required />Eu{' '}
+      </label>
+      <input type="checkbox" name="foo-checkbox" value="2" /> Tu <input type="checkbox" name="foo-checkbox" value="3" />{' '}
+      Eles
+      <input type="checkbox" name="bar-checkbox" value="1" />Eu <input type="checkbox" name="bar-checkbox" value="2" />{' '}
+      Tu <input type="checkbox" name="bar-checkbox" value="3" /> Eles
+    </div>
     <button>Submit</button> <button type="reset">Reset</button>
   </form>
 );
