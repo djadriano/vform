@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import 'babel-polyfill';
-
 import './stylesheets/index';
 
 import FormValidator from './javascripts/form-validator';
@@ -12,7 +11,6 @@ let foo;
 document.addEventListener('DOMContentLoaded', event => {
   foo = new FormValidator('.form', {
     classes: {
-      container: 'ag-field',
       errorElement: 'ag-field-error'
     },
     events: {
@@ -80,9 +78,9 @@ const hello = evt => {
 
 const App = props => (
   <form className="form" noValidate>
-    <label className="ag-field">
+    <label data-field-container="name">
       <input
-        type="email"
+        type="text"
         name="name"
         data-valid-on-blur="1"
         minLength="4"
@@ -90,28 +88,30 @@ const App = props => (
         className="foo"
         data-empty-message="Empty message"
         data-error-message="Error message"
+        data-length-message="Length message"
       />
       <span className="ag-field-error" />
     </label>
-    <p>
+    <div data-field-container="foo">
       <label className="ag-field">
-        <input type="radio" name="foo" value="1" required />Eu
+        <input type="radio" name="foo" value="1" />Eu
       </label>
       <label className="ag-field">
-        <input type="radio" name="foo" value="2" /> Tu
+        <input type="radio" name="foo" value="2" required data-empty-message="Empty message" /> Tu
       </label>
-      <input type="radio" name="foo" value="3" /> Eles
-      <input type="radio" name="bar" value="1" />Eu <input type="radio" name="bar" value="2" /> Tu{' '}
-      <input type="radio" name="bar" value="3" /> Eles
-    </p>
-    <div>
       <label className="ag-field">
-        <input type="checkbox" name="foo-checkbox" value="1" required />Eu{' '}
+        <input type="radio" name="foo" value="3" /> Eles
       </label>
-      <input type="checkbox" name="foo-checkbox" value="2" /> Tu <input type="checkbox" name="foo-checkbox" value="3" />{' '}
-      Eles
-      <input type="checkbox" name="bar-checkbox" value="1" />Eu <input type="checkbox" name="bar-checkbox" value="2" />{' '}
-      Tu <input type="checkbox" name="bar-checkbox" value="3" /> Eles
+      <span className="ag-field-error" />
+    </div>
+    <div data-field-container="bar">
+      <label className="ag-field">
+        <input type="checkbox" name="bar" value="1" required data-empty-message="Empty message" />Eu
+      </label>
+      <label className="ag-field">
+        <input type="checkbox" name="bar" value="1" required data-empty-message="Empty message" />Eu
+      </label>
+      <span className="ag-field-error" />
     </div>
     <button>Submit</button> <button type="reset">Reset</button>
   </form>

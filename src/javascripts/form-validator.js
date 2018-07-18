@@ -13,6 +13,7 @@ const checkOnTypeFieldIsEmpty = Symbol('checkOnTypeFieldIsEmpty');
 const checkFieldIsEmpty = Symbol('checkFieldIsEmpty');
 const checkFieldIsNotEmpty = Symbol('checkFieldIsNotEmpty');
 const focusOnFirstFieldError = Symbol('focusOnFirstFieldError');
+const getContainerElement = Symbol('getContainerElement');
 const mergeOptions = Symbol('mergeOptions');
 const debounce = Symbol('debounce');
 
@@ -93,7 +94,7 @@ class FormValidator {
       if (execBeforeSubmit) await execBeforeSubmit();
 
       if (!this.form.checkValidity()) {
-        formFields.map(item => {
+        formFields.filter(field => field.hasAttribute('required')).map(item => {
           this.checkFieldsValidity({ el: item });
         });
 
@@ -128,7 +129,12 @@ class FormValidator {
 
   getFields() {
     return [...this.form.elements].filter(
-      item => item.type != 'file' && item.type != 'reset' && item.type != 'submit' && item.type != 'button'
+      item =>
+        item.type != 'file' &&
+        item.type != 'reset' &&
+        item.type != 'submit' &&
+        item.type != 'button' &&
+        item.getAttribute('name')
     );
   }
 
@@ -148,9 +154,11 @@ class FormValidator {
       if (formFields && this.form.checkValidity()) {
         let fieldsValue = {};
 
-        formFields.filter(item => item.type != 'radio' && item.type != 'checkbox').map(item => {
-          fieldsValue[item.name] = item.value;
-        });
+        formFields
+          .filter(item => item.type != 'radio' && item.type != 'checkbox' && item.getAttribute('name'))
+          .map(item => {
+            fieldsValue[item.name] = item.value;
+          });
 
         fieldsValue = { ...fieldsValue, ...this[getRadioFields]() };
         fieldsValue = { ...fieldsValue, ...this[getCheckboxFields]() };
@@ -175,12 +183,11 @@ class FormValidator {
   setValidField(field) {
     const { customError } = field.validity;
     let { classes } = this.defaults;
-    const containerEl = this[getErrorElement](field);
-    const invalidClass = classes.invalid;
+    const containerEl = this[getContainerElement](field);
 
     if (customError) field.setCustomValidity('');
 
-    containerEl.classList.remove(invalidClass);
+    containerEl.classList.remove(classes.invalid);
   }
 
   // -------------------------------------------------------------------------
@@ -188,13 +195,12 @@ class FormValidator {
   setInValidField(field) {
     const { customError } = field.validity;
     let { classes } = this.defaults;
-    const containerEl = this[getErrorElement](field);
+    const containerEl = this[getContainerElement](field);
     const getErrorMessage = field.getAttribute('data-error-message');
-    const invalidClass = classes.invalid;
 
     if (!customError) field.setCustomValidity('error');
 
-    containerEl.classList.add(invalidClass);
+    containerEl.classList.add(classes.invalid);
 
     this.setErrorMessage(field, getErrorMessage);
   }
@@ -202,7 +208,7 @@ class FormValidator {
   // -------------------------------------------------------------------------
 
   setErrorMessage(field = null, message = null) {
-    const containerEl = this[getErrorElement](field);
+    const containerEl = this[getContainerElement](field);
     const errorEl = containerEl.querySelector(`.${classes.errorElement}`);
 
     if (field && message) {
@@ -223,6 +229,14 @@ class FormValidator {
 
   [getErrorElement](field) {
     return field.parentNode;
+  }
+
+  // -------------------------------------------------------------------------
+
+  [getContainerElement](field) {
+    const fieldName = field.getAttribute('name');
+    const containerEl = this.form.querySelector(`[data-field-container="${fieldName}"]`);
+    return containerEl;
   }
 
   // -------------------------------------------------------------------------
@@ -264,7 +278,7 @@ class FormValidator {
     let formFields = this.getFields();
     let radioFields = {};
 
-    formFields.filter(item => item.type == 'radio' && item.checked).map(item => {
+    formFields.filter(item => item.type == 'radio' && item.checked && item.getAttribute('name')).map(item => {
       if (item.name) radioFields[item.name] = item.value;
     });
 
@@ -276,7 +290,9 @@ class FormValidator {
   [getCheckboxFields]() {
     let formFields = this.getFields();
 
-    let checkboxFields = formFields.filter(item => item.type == 'checkbox' && item.checked);
+    let checkboxFields = formFields.filter(
+      item => item.type == 'checkbox' && item.checked && item.getAttribute('name')
+    );
 
     const groupBy = (arr, key) => {
       return (arr || []).reduce(
@@ -299,7 +315,7 @@ class FormValidator {
 
     const { classes } = this.defaults;
     const { onChangeFieldChecked } = this.defaults.events;
-    const containerEl = this[getErrorElement](field);
+    const containerEl = this[getContainerElement](field);
 
     if (!valueMissing) {
       containerEl.classList.remove(classes.invalid);
@@ -319,17 +335,20 @@ class FormValidator {
   [checkFieldIsEmpty](field) {
     const { valid, valueMissing } = field.validity;
     let { classes } = this.defaults;
-    const containerEl = this[getErrorElement](field);
-    const errorEl = containerEl.querySelector(`.${classes.errorElement}`);
+    const containerEl = this[getContainerElement](field);
     const getEmptyMessage = field.getAttribute('data-empty-message');
     const invalidClass = classes.invalid;
 
-    const setErrorToField = () => {
-      containerEl.classList.add(invalidClass);
-      if (errorEl) errorEl.innerHTML = getEmptyMessage;
-    };
+    if (containerEl) {
+      const errorEl = containerEl.querySelector(`.${classes.errorElement}`);
 
-    !valid && valueMissing ? setErrorToField() : this[checkFieldIsNotEmpty](field, false);
+      const setErrorToField = () => {
+        containerEl.classList.add(invalidClass);
+        if (errorEl) errorEl.innerHTML = getEmptyMessage;
+      };
+
+      !valid && valueMissing ? setErrorToField() : this[checkFieldIsNotEmpty](field, false);
+    }
   }
 
   // -------------------------------------------------------------------------
@@ -339,37 +358,41 @@ class FormValidator {
     const { valid, valueMissing, typeMismatch, patternMismatch, tooLong, tooShort, customError } = field.validity;
 
     const { classes } = this.defaults;
-    const containerEl = this[getErrorElement](field);
-    const errorEl = containerEl.querySelector(`.${classes.errorElement}`);
+    const containerEl = this[getContainerElement](field);
     const getErrorMessage = field.getAttribute('data-error-message');
     const getLengthMessage = field.getAttribute('data-length-message');
     const fieldMinLength = field.getAttribute('minlength');
     const invalidClass = classes.invalid;
 
-    if (!valid && !valueMissing) {
-      if (typeMismatch || patternMismatch || tooLong || tooShort) {
-        containerEl.classList.add(invalidClass);
+    if (containerEl) {
+      const errorEl = containerEl.querySelector(`.${classes.errorElement}`);
 
-        if (errorEl) {
-          errorEl.innerHTML =
-            fieldMinLength && field.value.length < fieldMinLength
-              ? getLengthMessage || getErrorMessage
-              : getErrorMessage;
-        }
-      } else {
-        if (!valid && customError) {
-          if (isBlur && onBlurFieldChecked) {
-            onBlurFieldChecked(field);
-            this.onValid();
+      if (!valid && !valueMissing) {
+        if (typeMismatch || patternMismatch || tooLong || tooShort) {
+          containerEl.classList.add(invalidClass);
+
+          if (errorEl) {
+            errorEl.innerHTML =
+              fieldMinLength && field.value.length < fieldMinLength
+                ? getLengthMessage || getErrorMessage
+                : getErrorMessage;
+          }
+        } else {
+          if (!valid && customError) {
+            if (isBlur && onBlurFieldChecked) {
+              onBlurFieldChecked(field);
+              this.onValid();
+            }
           }
         }
-      }
-    } else if (valid && !valueMissing) {
-      containerEl.classList.remove(invalidClass);
+      } else if (valid && !valueMissing) {
+        containerEl.classList.remove(invalidClass);
+        errorEl.innerHTML = '';
 
-      if (isBlur && onBlurFieldChecked) {
-        onBlurFieldChecked(field);
-        this.onValid();
+        if (isBlur && onBlurFieldChecked) {
+          onBlurFieldChecked(field);
+          this.onValid();
+        }
       }
     }
   };
@@ -383,8 +406,14 @@ class FormValidator {
 
     if (el.validity.valid) {
       allCheckFields.map(item => {
-        const containerEl = this[getErrorElement](item);
-        containerEl.classList.remove(classes.invalid);
+        const containerEl = this[getContainerElement](item);
+
+        if (containerEl) {
+          const errorEl = containerEl.querySelector(`.${classes.errorElement}`);
+
+          containerEl.classList.remove(classes.invalid);
+          errorEl.innerHTML = '';
+        }
       });
 
       this.onValid();
@@ -394,14 +423,10 @@ class FormValidator {
   // -------------------------------------------------------------------------
 
   [focusOnFirstFieldError]() {
-    let checkIsIE = document.querySelector('html');
     let firstFieldInvalid = document.querySelectorAll(':invalid');
-    let getIndexField = checkIsIE.classList.contains('ie-11') || checkIsIE.classList.contains('edge') ? 0 : 1;
-    firstFieldInvalid = [...firstFieldInvalid];
+    firstFieldInvalid = [...firstFieldInvalid].filter(field => field.getAttribute('name'));
 
-    if (firstFieldInvalid && firstFieldInvalid.length > 1) {
-      firstFieldInvalid[getIndexField].focus();
-    }
+    if (firstFieldInvalid && firstFieldInvalid.length > 1) firstFieldInvalid[0].focus();
   }
 
   // -------------------------------------------------------------------------
