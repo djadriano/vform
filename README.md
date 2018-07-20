@@ -22,7 +22,7 @@ First initialize the library:
 document.addEventListener("DOMContentLoaded", event => {
   const Validation = new VForm(".form", {
     classes: {
-      errorElement: "ag-field-error"
+      errorElement: "field-error"
     },
     events: {
       onInitializedSuccess: onInitializedSuccessForm,
