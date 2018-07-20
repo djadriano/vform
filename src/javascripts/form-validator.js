@@ -25,8 +25,6 @@ const defaults = {
   classes: {
     valid: 'ag-field--valid',
     invalid: 'ag-field--invalid',
-    checkValid: 'ag-check--valid',
-    checkInvalid: 'ag-check--invalid',
     formValid: 'ag-form--valid',
     errorElement: 'ag-field-error'
   },
@@ -42,7 +40,7 @@ const defaults = {
   }
 };
 
-class FormValidator {
+class VForm {
   constructor(el, settings = {}) {
     this.form = document.querySelector(el);
     this.el = el;
@@ -208,6 +206,7 @@ class FormValidator {
   // -------------------------------------------------------------------------
 
   setErrorMessage(field = null, message = null) {
+    let { classes } = this.defaults;
     const containerEl = this[getContainerElement](field);
     const errorEl = containerEl.querySelector(`.${classes.errorElement}`);
 
@@ -317,7 +316,7 @@ class FormValidator {
     const { onChangeFieldChecked } = this.defaults.events;
     const containerEl = this[getContainerElement](field);
 
-    if (!valueMissing) {
+    if (valid && !valueMissing) {
       containerEl.classList.remove(classes.invalid);
     }
 
@@ -463,4 +462,4 @@ class FormValidator {
   }
 }
 
-export default FormValidator;
+export default VForm;

@@ -4,12 +4,12 @@ import ReactDOM from 'react-dom';
 import 'babel-polyfill';
 import './stylesheets/index';
 
-import FormValidator from './javascripts/form-validator';
+import VForm from './javascripts/form-validator';
 
 let foo;
 
 document.addEventListener('DOMContentLoaded', event => {
-  foo = new FormValidator('.form', {
+  foo = new VForm('.form', {
     classes: {
       errorElement: 'ag-field-error'
     },
@@ -40,6 +40,10 @@ const onBlurFieldChecked = field => {
   console.log('onBlurFieldChecked', field);
 };
 
+const onChangeFieldChecked = field => {
+  console.log('onChangeFieldChecked', field);
+};
+
 const onValid = async (formStatus, formFields) => {
   const bar = await formFields;
   console.log('onValid', formStatus, bar);
@@ -55,18 +59,18 @@ const handleInput = evt => {
   if (el.validity.valid) {
     console.log('valid');
     if (el.value.length > 4) {
-      foo.setFieldInvalid(el, true);
+      foo.setInValidField(el);
     } else {
-      foo.setFieldValid(el, true);
+      foo.setValidField(el);
     }
   } else {
     console.log('not valid');
     if (el.validity.customError) {
       console.log('has error');
       if (el.value.length > 4) {
-        foo.setFieldInvalid(el, true);
+        foo.setInValidField(el);
       } else {
-        foo.setFieldValid(el, true);
+        foo.setValidField(el);
       }
     }
   }
@@ -80,12 +84,11 @@ const App = props => (
   <form className="form" noValidate>
     <label data-field-container="name">
       <input
-        type="text"
+        type="email"
         name="name"
-        data-valid-on-blur="1"
-        minLength="4"
         required
         className="foo"
+        minLength="4"
         data-empty-message="Empty message"
         data-error-message="Error message"
         data-length-message="Length message"
