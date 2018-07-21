@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import 'babel-polyfill';
 import './stylesheets/index';
 
-import VForm from './javascripts/form-validator';
+import VForm from './javascripts/vform';
 
 let foo;
 
