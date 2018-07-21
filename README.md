@@ -3,7 +3,7 @@
 A dependency-free vanilla Javascript form validation using Constraint Validation API.
 Just use HTML5 form fields based in validation attributes and that's it, the library resolve all!
 
-See more about HTML validation attributes in MDN:
+See more about HTML validation attributes in:
 [MDN - Constraint validation](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation)
 
 # Setup
