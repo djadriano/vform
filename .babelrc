@@ -1,4 +1,14 @@
 {
   "presets": [["env", { "modules": false }], "stage-3"],
-  "plugins": ["transform-class-properties", "syntax-dynamic-import"]
+  "plugins": [
+    "transform-class-properties",
+    "syntax-dynamic-import",
+    [
+      "transform-runtime",
+      {
+        "polyfill": false,
+        "regenerator": true
+      }
+    ]
+  ]
 }
