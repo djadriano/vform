@@ -75,6 +75,8 @@ Classes are helpful for indicate the state of field or form.
 
 # Events
 
+Events are helpful to get the status of form and fields.
+
 | Name                 | Description                                                                                                                     |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | onInitializedSuccess | Event is called if library is initialized with success. This method return the form DOM element                                 |
@@ -88,6 +90,8 @@ Classes are helpful for indicate the state of field or form.
 
 # Data Attributes
 
+Data attributes helps you to control and customize the validation.
+
 | Name                 | Description                                                                                                      |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | data-field-container | This data indicate a container for field. The value should be the same value of name attribute of field element. |
@@ -96,6 +100,8 @@ Classes are helpful for indicate the state of field or form.
 | data-length-message  | Message for indicate that field needs contain a minimum size of characteres based on minlength attribute         |
 
 # Methods
+
+Are some helpful methods that you can access directly via library instance.
 
 | Name            | Description                                                                                                                                                                |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
