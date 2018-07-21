@@ -110,3 +110,11 @@ Are some helpful methods that you can access directly via library instance.
 | setValidField   | Indicate that a field is valid                                                                                                                                             |
 | setInValidField | Indicate that a field is not valid                                                                                                                                         |
 | setErrorMessage | Set a error message dynamically for a field                                                                                                                                |
+
+# Browser Support
+
+* IE 11+
+* Chrome 49+
+* Safari 10+
+* IOS Safari 10+
+* Firefox 29+
