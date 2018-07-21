@@ -40,19 +40,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [
-      '.js',
-      '.jsx',
-      '.json',
-      '.scss',
-      '.css',
-      '.svg',
-      '.pdf',
-      '.zip',
-      'mp4',
-      'jpg',
-      'png'
-    ],
+    extensions: ['.js', '.jsx', '.json', '.scss', '.css', '.svg', '.pdf', '.zip', 'mp4', 'jpg', 'png'],
     alias: {
       stylesheets: resolve(__dirname, '../src/stylesheets'),
       javascripts: resolve(__dirname, '../src/javascripts'),
