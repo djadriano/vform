@@ -23,10 +23,10 @@ const debounce = Symbol('debounce');
 
 const defaults = {
   classes: {
-    valid: 'ag-field--valid',
-    invalid: 'ag-field--invalid',
-    formValid: 'ag-form--valid',
-    errorElement: 'ag-field-error'
+    valid: 'field--valid',
+    invalid: 'field--invalid',
+    formValid: 'form--valid',
+    errorElement: 'field-error'
   },
   events: {
     onInitializedSuccess: null,

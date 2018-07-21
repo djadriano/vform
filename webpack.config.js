@@ -9,6 +9,7 @@ module.exports = {
     stats: 'errors-only',
     overlay: false
   },
+  entry: './example/js/index.js',
   module: {
     rules: [
       {
@@ -42,16 +43,16 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss', '.css', '.svg', '.pdf', '.zip', 'mp4', 'jpg', 'png'],
     alias: {
-      stylesheets: resolve(__dirname, '../src/stylesheets'),
-      javascripts: resolve(__dirname, '../src/javascripts'),
-      assets: resolve(__dirname, '../assets')
+      stylesheets: resolve(__dirname, './example/styles'),
+      javascripts: resolve(__dirname, './example/js'),
+      source: resolve(__dirname, './src')
     }
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebPackPlugin({
-      template: './src/index.html',
+      template: './example/index.html',
       filename: './index.html'
     }),
     new MiniCssExtractPlugin({

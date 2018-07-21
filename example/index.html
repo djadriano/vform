@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Form Validation</title>
+</head>
+
+<body>
+  <form class="form" noValidate>
+    <label data-field-container="name">
+      <input type="email" name="name" required class="foo" minlength="4" data-empty-message="Empty message" data-error-message="Error message"
+        data-length-message="Length message" />
+      <span class="ag-field-error" />
+    </label>
+    <div data-field-container="foo">
+      <label class="ag-field">
+        <input type="radio" name="foo" value="1" />Eu
+      </label>
+      <label class="ag-field">
+        <input type="radio" name="foo" value="2" required data-empty-message="Empty message" /> Tu
+      </label>
+      <label class="ag-field">
+        <input type="radio" name="foo" value="3" /> Eles
+      </label>
+      <span class="ag-field-error" />
+    </div>
+    <div data-field-container="bar">
+      <label class="ag-field">
+        <input type="checkbox" name="bar" value="1" required data-empty-message="Empty message" />Eu
+      </label>
+      <label class="ag-field">
+        <input type="checkbox" name="bar" value="1" required data-empty-message="Empty message" />Eu
+      </label>
+      <span class="ag-field-error" />
+    </div>
+    <button>Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+</body>
+
+</html>
