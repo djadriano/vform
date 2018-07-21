@@ -64,6 +64,8 @@ Is possible set some options like css classes and events:
 
 # Classes
 
+Classes are helpful for indicate the state of field or form.
+
 | Name         | Description                                                               |
 | ------------ | ------------------------------------------------------------------------- |
 | valid        | class that will be set in field after be validated                        |
@@ -73,32 +75,32 @@ Is possible set some options like css classes and events:
 
 # Events
 
-| Name                 | Description                                                               |
-| -------------------- | ------------------------------------------------------------------------- |
-| onInitializedSuccess | class that will be set in field after be validated                        |
-| onInitializedError   | class that will be set in field after check the status and return invalid |
-| onSubmit             | class that will be set in form when is valid                              |
-| onReset              | class of element that is render the error message                         |
-| onValid              | class of element that is render the error message                         |
-| onBlurFieldChecked   | class of element that is render the error message                         |
-| onChangeFieldChecked | class of element that is render the error message                         |
-| execBeforeSubmit     | class of element that is render the error message                         |
+| Name                 | Description                                                                                                                     |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| onInitializedSuccess | Event is called if library is initialized with success. This method return the form DOM element                                 |
+| onInitializedError   | Event is called if library is not initialized                                                                                   |
+| onSubmit             | Event is called when the form is submited. If form is valid, the method return a promise with a object that contains the fields |
+| onReset              | Event is called when the form is reseted                                                                                        |
+| onValid              | Event is called when the form stay valid                                                                                        |
+| onBlurFieldChecked   | Event is called when the blur is executed and the field is valid. The method return the field element                           |
+| onChangeFieldChecked | Event is called after the field element stay valid and in onChange listener. The method return the field element                |
+| execBeforeSubmit     | Is executed before the submit of form. This method should return a promise                                                      |
 
 # Data Attributes
 
-| Name                 | Description                                                               |
-| -------------------- | ------------------------------------------------------------------------- |
-| data-field-container | class that will be set in field after be validated                        |
-| data-error-message   | class that will be set in field after check the status and return invalid |
-| data-empty-message   | class that will be set in form when is valid                              |
-| data-length-message  | class of element that is render the error message                         |
+| Name                 | Description                                                                                                      |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| data-field-container | This data indicate a container for field. The value should be the same value of name attribute of field element. |
+| data-error-message   | Message for indicate that field contains error                                                                   |
+| data-empty-message   | Message for indicate that field is empty                                                                         |
+| data-length-message  | Message for indicate that field needs contain a minimum size of characteres based on minlength attribute         |
 
 # Methods
 
-| Name            | Description                                                               |
-| --------------- | ------------------------------------------------------------------------- |
-| update          | class that will be set in field after be validated                        |
-| getFieldsValues | class that will be set in field after check the status and return invalid |
-| setValidField   | class that will be set in form when is valid                              |
-| setInValidField | class of element that is render the error message                         |
-| setErrorMessage | class of element that is render the error message                         |
+| Name            | Description                                                                                                                                                                |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| update          | Is helpful if needs insert a new field dynamically in form or needs remove some field of form. This method will register the listeners and set validations for new fields. |
+| getFieldsValues | Return a promise that contain a object with fields values                                                                                                                  |
+| setValidField   | Indicate that a field is valid                                                                                                                                             |
+| setInValidField | Indicate that a field is not valid                                                                                                                                         |
+| setErrorMessage | Set a error message dynamically for a field                                                                                                                                |
