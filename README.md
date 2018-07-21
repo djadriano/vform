@@ -6,6 +6,20 @@ Just use HTML5 form fields based in validation attributes and that's it, the lib
 See more about HTML validation attributes in:
 [MDN - Constraint validation](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation)
 
+# Install
+
+NPM:
+
+```sh
+npm i @djadrianof/vform --saveDev
+```
+
+Yarn:
+
+```sh
+yarn add @djadrianof/vform -D
+```
+
 # Setup
 
 Import the library in your code:
