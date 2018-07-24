@@ -25,7 +25,7 @@ yarn add @djadrianof/vform -D
 Import the library in your code:
 
 ```javascript
-import VForm from "vform";
+import VForm from "@djadrianof/vform";
 ```
 
 # Usage
