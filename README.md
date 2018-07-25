@@ -28,6 +28,12 @@ Import the library in your code:
 import VForm from "@djadrianof/vform";
 ```
 
+Or get the script directly from unpkg.com
+
+```html
+<script src="https://unpkg.com/@djadrianof/vform@0.1.4/dist/vform.min.js"></script>
+```
+
 # Usage
 
 First initialize the library:
