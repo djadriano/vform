@@ -33,7 +33,7 @@ import VForm from "@djadrianof/vform";
 Or get the script directly from unpkg.com
 
 ```html
-<script src="https://unpkg.com/@djadrianof/vform@0.1.5/dist/vform.min.js"></script>
+<script src="https://unpkg.com/@djadrianof/vform"></script>
 ```
 
 # Usage
