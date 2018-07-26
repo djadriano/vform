@@ -88,13 +88,13 @@ Classes are helpful for indicate the state of field or form.
 
 ```javascript
 const Validation = new VForm(".form", {
-    classes: {
-      valid: "field-valid",
-      invalid: "field-invalid",
-      formValid: "form-valid",
-      errorElement: "error-element"
-    }
-  });
+  classes: {
+    valid: "field-valid",
+    invalid: "field-invalid",
+    formValid: "form-valid",
+    errorElement: "error-element"
+  }
+});
 ```
 
 | Name         | Description                                                               |
@@ -110,17 +110,17 @@ Events are helpful to get the status of form and fields.
 
 ```javascript
 const Validation = new VForm(".form", {
-    events: {
-      onInitializedSuccess: onInitializedSuccessForm,
-      onInitializedError: onInitializedError,
-      onSubmit: onSubmit,
-      onReset: onReset,
-      onValid: onValid,
-      onBlurFieldChecked: onBlurFieldChecked,
-      onChangeFieldChecked: onChangeFieldChecked,
-      execBeforeSubmit: execBeforeSubmit
-    }
-  });
+  events: {
+    onInitializedSuccess: onInitializedSuccessForm,
+    onInitializedError: onInitializedError,
+    onSubmit: onSubmit,
+    onReset: onReset,
+    onValid: onValid,
+    onBlurFieldChecked: onBlurFieldChecked,
+    onChangeFieldChecked: onChangeFieldChecked,
+    execBeforeSubmit: execBeforeSubmit
+  }
+});
 ```
 
 | Name                 | Description                                                                                                                     |

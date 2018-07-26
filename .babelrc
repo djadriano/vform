@@ -5,15 +5,15 @@
       {
         "modules": false,
         "targets": {
-          "browsers": ["last 2 versions", "safari >= 7"]
+          "browsers": ["Chrome >= 49", "FireFox >= 44", "Safari >= 9", "ie >= 11", "last 4 Edge versions"]
         }
       }
     ],
     "stage-3"
   ],
+  "ignore": ["node_modules"],
   "plugins": [
     "transform-class-properties",
-    "syntax-dynamic-import",
     [
       "transform-runtime",
       {
