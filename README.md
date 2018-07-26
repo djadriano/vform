@@ -1,3 +1,5 @@
+![alt text](https://raw.githubusercontent.com/djadriano/vform/master/src/vform-logo.png "VForm - Vanilla JS Form Validation")
+
 # VForm
 
 A dependency-free vanilla Javascript form validation using Constraint Validation API.
@@ -31,7 +33,7 @@ import VForm from "@djadrianof/vform";
 Or get the script directly from unpkg.com
 
 ```html
-<script src="https://unpkg.com/@djadrianof/vform"></script>
+<script src="https://unpkg.com/@djadrianof/vform@0.1.5/dist/vform.min.js"></script>
 ```
 
 # Usage
