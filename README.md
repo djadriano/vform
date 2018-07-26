@@ -86,6 +86,17 @@ Is possible set some options like css classes and events:
 
 Classes are helpful for indicate the state of field or form.
 
+```javascript
+const Validation = new VForm(".form", {
+    classes: {
+      valid: "field-valid",
+      invalid: "field-invalid",
+      formValid: "form-valid",
+      errorElement: "error-element"
+    }
+  });
+```
+
 | Name         | Description                                                               |
 | ------------ | ------------------------------------------------------------------------- |
 | valid        | class that will be set in field after be validated                        |
@@ -96,6 +107,21 @@ Classes are helpful for indicate the state of field or form.
 # Events
 
 Events are helpful to get the status of form and fields.
+
+```javascript
+const Validation = new VForm(".form", {
+    events: {
+      onInitializedSuccess: onInitializedSuccessForm,
+      onInitializedError: onInitializedError,
+      onSubmit: onSubmit,
+      onReset: onReset,
+      onValid: onValid,
+      onBlurFieldChecked: onBlurFieldChecked,
+      onChangeFieldChecked: onChangeFieldChecked,
+      execBeforeSubmit: execBeforeSubmit
+    }
+  });
+```
 
 | Name                 | Description                                                                                                                     |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -111,6 +137,22 @@ Events are helpful to get the status of form and fields.
 # Data Attributes
 
 Data attributes helps you to control and customize the validation.
+
+```html
+<label data-field-container="name">
+    <input
+        type="email"
+        name="name"
+        required
+        class="foo"
+        minlength="4"
+        data-empty-message="Empty message"
+        data-error-message="Error message"
+        data-length-message="Length message"
+    />
+    <span class="field-error"></span>
+</label>
+```
 
 | Name                 | Description                                                                                                      |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
