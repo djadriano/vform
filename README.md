@@ -58,6 +58,10 @@ document.addEventListener("DOMContentLoaded", event => {
 });
 ```
 
+# Live Examples
+
+* [Initialize library and basic usage](https://codepen.io/djadriano/pen/ejEZgP)
+
 # Set your form element
 
 Obs: Set the attribute noValidate in your form to prevent default browser validation.
