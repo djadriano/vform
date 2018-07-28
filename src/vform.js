@@ -425,7 +425,7 @@ class VForm {
     let firstFieldInvalid = document.querySelectorAll(':invalid');
     firstFieldInvalid = [...firstFieldInvalid].filter(field => field.getAttribute('name'));
 
-    if (firstFieldInvalid && firstFieldInvalid.length > 1) firstFieldInvalid[0].focus();
+    if (firstFieldInvalid && firstFieldInvalid.length) firstFieldInvalid[0].focus();
   }
 
   // -------------------------------------------------------------------------
