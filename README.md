@@ -60,7 +60,9 @@ document.addEventListener("DOMContentLoaded", event => {
 
 # Live Examples
 
-* [Initialize library and basic usage](https://codepen.io/djadriano/pen/ejEZgP)
+* [Example 01 - Initialize library and basic usage](https://codepen.io/djadriano/pen/ejEZgP)
+* [Example 02 - Checkbox and Radio Button](https://codepen.io/djadriano/full/ejVQBV)
+* [Example 03 - Validate with Regex Pattern Attribute](https://codepen.io/djadriano/full/pZaQZa)
 
 # Set your form element
 
