@@ -16,6 +16,19 @@ document.addEventListener('DOMContentLoaded', event => {
       onSubmit: onSubmit
     }
   });
+
+  new VForm('.form2', {
+    classes: {
+      errorElement: 'ag-field-error'
+    },
+    events: {
+      onInitializedSuccess: onInitializedSuccessForm,
+      onInitializedError: onInitializedError,
+      onValid: onValid,
+      onBlurFieldChecked: onBlurFieldChecked,
+      onSubmit: onSubmit
+    }
+  });
 });
 
 const onSubmit = async fields => {
