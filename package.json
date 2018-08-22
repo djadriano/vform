@@ -1,7 +1,8 @@
 {
   "name": "@djadrianof/vform",
-  "version": "0.1.12",
-  "description": "A dependency-free vanilla Javascript form validation using Constraint Validation API",
+  "version": "0.1.13",
+  "description":
+    "A dependency-free vanilla Javascript form validation using Constraint Validation API",
   "author": "Adriano Fernandes <djadrianof@gmail.com>",
   "repository": {
     "type": "git",
@@ -50,7 +51,8 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "build": "rm -rf ./dist/vform.min.js & webpack --config webpack.config.build.js",
+    "build":
+      "rm -rf ./dist/vform.min.js & webpack --config webpack.config.build.js",
     "prepublish": "yarn run build"
   }
 }
