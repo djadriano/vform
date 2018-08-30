@@ -206,9 +206,8 @@ class VForm {
   // -------------------------------------------------------------------------
 
   setErrorMessage(field = null, message = null) {
-    let { classes } = this.defaults;
     const containerEl = this[getContainerElement](field);
-    const errorEl = containerEl.querySelector(`.${classes.errorElement}`);
+    const errorEl = this[getErrorElement](containerEl);
 
     if (field && message) {
       if (errorEl) errorEl.innerHTML = message;
@@ -226,8 +225,12 @@ class VForm {
 
   // -------------------------------------------------------------------------
 
-  [getErrorElement](field) {
-    return field.parentNode;
+  [getErrorElement](containerEl) {
+    let { classes } = this.defaults;
+    const dataFieldContainer = containerEl.getAttribute('data-field-container');
+    const getErrorWithReference = containerEl.querySelector(`[data-reference-error="${dataFieldContainer}"]`);
+
+    return getErrorWithReference ? getErrorWithReference : containerEl.querySelector(`.${classes.errorElement}`);
   }
 
   // -------------------------------------------------------------------------
@@ -339,7 +342,7 @@ class VForm {
     const invalidClass = classes.invalid;
 
     if (containerEl) {
-      const errorEl = containerEl.querySelector(`.${classes.errorElement}`);
+      const errorEl = this[getErrorElement](containerEl);
 
       const setErrorToField = () => {
         containerEl.classList.add(invalidClass);
@@ -364,7 +367,7 @@ class VForm {
     const invalidClass = classes.invalid;
 
     if (containerEl) {
-      const errorEl = containerEl.querySelector(`.${classes.errorElement}`);
+      const errorEl = this[getErrorElement](containerEl);
 
       if (!valid && !valueMissing) {
         if (typeMismatch || patternMismatch || tooLong || tooShort) {
@@ -408,7 +411,7 @@ class VForm {
         const containerEl = this[getContainerElement](item);
 
         if (containerEl) {
-          const errorEl = containerEl.querySelector(`.${classes.errorElement}`);
+          const errorEl = this[getErrorElement](containerEl);
 
           containerEl.classList.remove(classes.invalid);
           errorEl.innerHTML = '';

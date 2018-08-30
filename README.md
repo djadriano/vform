@@ -162,12 +162,31 @@ Data attributes helps you to control and customize the validation.
 </label>
 ```
 
-| Name                 | Description                                                                                                      |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| data-field-container | This data indicate a container for field. The value should be the same value of name attribute of field element. |
-| data-error-message   | Message for indicate that field contains error                                                                   |
-| data-empty-message   | Message for indicate that field is empty                                                                         |
-| data-length-message  | Message for indicate that field needs contain a minimum size of characteres based on minlength attribute         |
+With a reference error element
+
+```html
+<label data-field-container="age">
+    <input
+        type="text"
+        name="age"
+        required
+        class="foo"
+        minlength="4"
+        data-empty-message="Empty message"
+        data-error-message="Error message"
+        data-length-message="Length message"
+    />
+    <span class="field-error" data-reference-error="age"></span>
+</label>
+```
+
+| Name                 | Description                                                                                                         |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| data-field-container | This data indicate a container for field. The value should be the same value of name attribute of field element.    |
+| data-error-message   | Message for indicate that field contains error                                                                      |
+| data-empty-message   | Message for indicate that field is empty                                                                            |
+| data-length-message  | Message for indicate that field needs contain a minimum size of characteres based on minlength attribute            |
+| data-reference-error | This data indicate a different error element to show a error (use the same name of element that you need reference) |
 
 # Methods
 
