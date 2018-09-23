@@ -3,13 +3,16 @@ import 'stylesheets/index';
 
 import VForm from 'source/vform';
 
+let form1;
+const disabledButton = document.querySelector('.disabled-btn');
+
 document.addEventListener('DOMContentLoaded', event => {
-  new VForm('.form', {
+  form1 = new VForm('.form', {
     classes: {
       errorElement: 'ag-field-error'
     },
     events: {
-      onInitializedSuccess: onInitializedSuccessForm,
+      onInitializedSuccess: onInitializedSuccessForm1,
       onInitializedError: onInitializedError,
       onValid: onValid,
       onBlurFieldChecked: onBlurFieldChecked,
@@ -36,6 +39,11 @@ const onSubmit = async fields => {
   console.log('onSubmit', objFields);
 };
 
+const onInitializedSuccessForm1 = () => {
+  console.log('onInitializeSuccess1');
+  disabledButton.addEventListener('click', disabledFields);
+};
+
 const onInitializedSuccessForm = () => {
   console.log('onInitializeSuccess');
 };
@@ -51,4 +59,15 @@ const onBlurFieldChecked = field => {
 const onValid = async (formStatus, formFields) => {
   const objFields = await formFields;
   console.log('onValid', formStatus, objFields);
+};
+
+const disabledFields = evt => {
+  evt.preventDefault();
+
+  Array.from(form1.form.elements)
+    .filter(item => item.type != 'submit' && item.type != 'reset' && item.type != 'button')
+    .map(item => {
+      item.disabled = !item.disabled;
+      form1.setValidField(item);
+    });
 };
