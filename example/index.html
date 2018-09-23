@@ -11,8 +11,8 @@
 <body>
   <form class="form" noValidate>
     <label data-field-container="name">
-      <input type="email" name="name" required class="foo" minlength="4" data-empty-message="Empty message" data-error-message="Error message"
-        data-length-message="Length message" />
+      <input type="email" name="name" required class="foo" minlength="4" data-empty-message="Empty message"
+        data-error-message="" data-length-message="Length message" />
       <span class="ag-field-error" />
     </label>
     <div data-field-container="hello">
@@ -20,8 +20,8 @@
         <input type="radio" name="hello" value="1" required data-empty-message="Empty message" />Euaaaa
       </label>
       <label data-field-container="age">
-        <input type="email" name="age" required class="foo" minlength="4" data-empty-message="Empty message" data-error-message="Error message"
-          data-length-message="Length message" />
+        <input type="email" name="age" required class="foo" minlength="4" data-empty-message="Empty message"
+          data-error-message="Error message" data-length-message="Length message" />
         <span class="ag-field-error" data-reference-error="age"></span>
       </label>
       <span class="ag-field-error" data-reference-error="hello"></span>
@@ -49,12 +49,13 @@
     </div>
     <button>Submit</button>
     <button type="reset">Reset</button>
+    <button class="disabled-btn">Disabled inputs</button>
   </form>
-
+  <hr />
   <form class="form2" noValidate>
     <label data-field-container="name">
-      <input type="email" name="name" required class="foo" minlength="4" data-empty-message="Empty message" data-error-message="Error message"
-        data-length-message="Length message" />
+      <input type="email" name="name" required class="foo" minlength="4" data-empty-message="Empty message"
+        data-error-message="Error message" data-length-message="Length message" />
       <span class="ag-field-error" />
     </label>
     <div data-field-container="foo">

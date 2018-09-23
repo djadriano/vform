@@ -186,6 +186,8 @@ class VForm {
     if (customError) field.setCustomValidity('');
 
     containerEl.classList.remove(classes.invalid);
+
+    this.setErrorMessage(field, '');
   }
 
   // -------------------------------------------------------------------------
@@ -205,13 +207,11 @@ class VForm {
 
   // -------------------------------------------------------------------------
 
-  setErrorMessage(field = null, message = null) {
+  setErrorMessage(field = null, message = '') {
     const containerEl = this[getContainerElement](field);
     const errorEl = this[getErrorElement](containerEl);
 
-    if (field && message) {
-      if (errorEl) errorEl.innerHTML = message;
-    }
+    if (field && errorEl) errorEl.innerHTML = message;
   }
 
   // ---------------------------------------------------------------
