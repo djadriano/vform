@@ -185,7 +185,7 @@ class VForm {
 
     if (customError) field.setCustomValidity('');
 
-    containerEl.classList.remove(classes.invalid);
+    if (containerEl) containerEl.classList.remove(classes.invalid);
 
     this.setErrorMessage(field, '');
   }
@@ -200,7 +200,7 @@ class VForm {
 
     if (!customError) field.setCustomValidity('error');
 
-    containerEl.classList.add(classes.invalid);
+    if (containerEl) containerEl.classList.add(classes.invalid);
 
     this.setErrorMessage(field, getErrorMessage);
   }
@@ -211,7 +211,7 @@ class VForm {
     const containerEl = this[getContainerElement](field);
     const errorEl = this[getErrorElement](containerEl);
 
-    if (field && errorEl) errorEl.innerHTML = message;
+    if (field && errorEl && containerEl) errorEl.innerHTML = message;
   }
 
   // ---------------------------------------------------------------

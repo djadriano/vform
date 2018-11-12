@@ -1,6 +1,6 @@
 {
   "name": "@djadrianof/vform",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description":
     "A dependency-free vanilla Javascript form validation using Constraint Validation API",
   "author": "Adriano Fernandes <djadrianof@gmail.com>",
