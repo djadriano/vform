@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', event => {
       onInitializedError: onInitializedError,
       onValid: onValid,
       onBlurFieldChecked: onBlurFieldChecked,
-      onSubmit: onSubmit
+      onSubmit: onSubmit,
+      onFocus: onFocus
     }
   });
 
@@ -37,6 +38,10 @@ document.addEventListener('DOMContentLoaded', event => {
 const onSubmit = async fields => {
   let objFields = await fields;
   console.log('onSubmit', objFields);
+};
+
+const onFocus = field => {
+  console.log('onFocus', field);
 };
 
 const onInitializedSuccessForm1 = () => {

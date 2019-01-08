@@ -34,6 +34,7 @@ const defaults = {
     onSubmit: null,
     onReset: null,
     onValid: null,
+    onFocus: null,
     onBlurFieldChecked: null,
     onChangeFieldChecked: null,
     execBeforeSubmit: null
@@ -425,10 +426,16 @@ class VForm {
   // -------------------------------------------------------------------------
 
   [focusOnFirstFieldError]() {
+    const { onFocus } = this.defaults.events;
     let firstFieldInvalid = this.form.querySelectorAll(':invalid');
     firstFieldInvalid = [...firstFieldInvalid].filter(field => field.getAttribute('name'));
 
-    if (firstFieldInvalid && firstFieldInvalid.length) firstFieldInvalid[0].focus();
+    if (firstFieldInvalid && firstFieldInvalid.length) {
+      const fieldToFocus = firstFieldInvalid[0];
+      fieldToFocus.focus();
+
+      if (onFocus) onFocus(fieldToFocus);
+    }
   }
 
   // -------------------------------------------------------------------------

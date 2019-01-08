@@ -124,6 +124,7 @@ const Validation = new VForm(".form", {
     onSubmit: onSubmit,
     onReset: onReset,
     onValid: onValid,
+    onFocus: onFocus,
     onBlurFieldChecked: onBlurFieldChecked,
     onChangeFieldChecked: onChangeFieldChecked,
     execBeforeSubmit: execBeforeSubmit
@@ -138,6 +139,7 @@ const Validation = new VForm(".form", {
 | onSubmit             | Event is called when the form is submited. If form is valid, the method return a promise with a object that contains the fields |
 | onReset              | Event is called when the form is reseted                                                                                        |
 | onValid              | Event is called when the form stay valid                                                                                        |
+| onFocus              | Event is called when the field is invalid. The method return the field element                                                  |
 | onBlurFieldChecked   | Event is called when the blur is executed and the field is valid. The method return the field element                           |
 | onChangeFieldChecked | Event is called after the field element stay valid and in onChange listener. The method return the field element                |
 | execBeforeSubmit     | Is executed before the submit of form. This method should return a promise                                                      |
