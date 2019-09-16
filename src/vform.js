@@ -87,15 +87,17 @@ class VForm {
 
     const { onSubmit, execBeforeSubmit } = this.defaults.events;
 
-    let formFields = this.getFields();
+    const formFields = this.getFields();
 
     if (formFields.length) {
       if (execBeforeSubmit) await execBeforeSubmit();
 
       if (!this.form.checkValidity()) {
-        formFields.filter(field => field.hasAttribute('required')).map(item => {
-          this.checkFieldsValidity({ el: item });
-        });
+        formFields
+          .filter(field => field.hasAttribute('required'))
+          .map(item => {
+            this.checkFieldsValidity({ el: item });
+          });
 
         this[focusOnFirstFieldError]();
       } else {
@@ -147,7 +149,7 @@ class VForm {
   // -------------------------------------------------------------------------
 
   getFieldsValues() {
-    let formFields = this.getFields();
+    const formFields = this.getFields();
 
     return new Promise((resolve, reject) => {
       if (formFields && this.form.checkValidity()) {
@@ -181,7 +183,7 @@ class VForm {
 
   setValidField(field) {
     const { customError } = field.validity;
-    let { classes } = this.defaults;
+    const { classes } = this.defaults;
     const containerEl = this[getContainerElement](field);
 
     if (customError) field.setCustomValidity('');
@@ -195,7 +197,7 @@ class VForm {
 
   setInValidField(field) {
     const { customError } = field.validity;
-    let { classes } = this.defaults;
+    const { classes } = this.defaults;
     const containerEl = this[getContainerElement](field);
     const getErrorMessage = field.getAttribute('data-error-message');
 
@@ -227,7 +229,7 @@ class VForm {
   // -------------------------------------------------------------------------
 
   [getErrorElement](containerEl) {
-    let { classes } = this.defaults;
+    const { classes } = this.defaults;
     const dataFieldContainer = containerEl.getAttribute('data-field-container');
     const getErrorWithReference = this.form.querySelector(`[data-reference-error="${dataFieldContainer}"]`);
 
@@ -245,7 +247,7 @@ class VForm {
   // -------------------------------------------------------------------------
 
   [setFieldsEventListener](listenerType = 'addEventListener') {
-    let formFields = this.getFields();
+    const formFields = this.getFields();
 
     if (formFields.length) {
       formFields.map(item => {
@@ -264,7 +266,7 @@ class VForm {
   // -------------------------------------------------------------------------
 
   [checkFormStatus]() {
-    let { classes } = this.defaults;
+    const { classes } = this.defaults;
 
     if (this.form.checkValidity()) {
       this.form.classList.add(classes.formValid);
@@ -278,12 +280,14 @@ class VForm {
   // -------------------------------------------------------------------------
 
   [getRadioFields]() {
-    let formFields = this.getFields();
-    let radioFields = {};
+    const formFields = this.getFields();
+    const radioFields = {};
 
-    formFields.filter(item => item.type == 'radio' && item.checked && item.getAttribute('name')).map(item => {
-      if (item.name) radioFields[item.name] = item.value;
-    });
+    formFields
+      .filter(item => item.type == 'radio' && item.checked && item.getAttribute('name'))
+      .map(item => {
+        if (item.name) radioFields[item.name] = item.value;
+      });
 
     return radioFields;
   }
@@ -291,9 +295,9 @@ class VForm {
   // -------------------------------------------------------------------------
 
   [getCheckboxFields]() {
-    let formFields = this.getFields();
+    const formFields = this.getFields();
 
-    let checkboxFields = formFields.filter(
+    const checkboxFields = formFields.filter(
       item => item.type == 'checkbox' && item.checked && item.getAttribute('name')
     );
 
@@ -337,7 +341,7 @@ class VForm {
 
   [checkFieldIsEmpty](field) {
     const { valid, valueMissing } = field.validity;
-    let { classes } = this.defaults;
+    const { classes } = this.defaults;
     const containerEl = this[getContainerElement](field);
     const getEmptyMessage = field.getAttribute('data-empty-message');
     const invalidClass = classes.invalid;
@@ -403,9 +407,9 @@ class VForm {
   // -------------------------------------------------------------------------
 
   [checkRadioCheckboxFieldsValidity] = evt => {
-    let { classes } = this.defaults;
-    let el = evt.target;
-    let allCheckFields = [...document.getElementsByName(el.getAttribute('name'))];
+    const { classes } = this.defaults;
+    const el = evt.target;
+    const allCheckFields = [...document.getElementsByName(el.getAttribute('name'))];
 
     if (el.validity.valid) {
       allCheckFields.map(item => {
@@ -441,7 +445,7 @@ class VForm {
   // -------------------------------------------------------------------------
 
   [mergeOptions](settings) {
-    let options = Object.assign({}, defaults, settings);
+    const options = Object.assign({}, defaults, settings);
 
     if (settings.hasOwnProperty('events')) {
       options.events = Object.assign({}, defaults.events, settings.events);
@@ -459,12 +463,12 @@ class VForm {
   [debounce](func, wait, immediate) {
     let timeout;
     return (...funcArgs) => {
-      let args = funcArgs;
-      let later = function() {
+      const args = funcArgs;
+      const later = function() {
         timeout = null;
         if (!immediate) func.apply(this, args);
       };
-      let callNow = immediate && !timeout;
+      const callNow = immediate && !timeout;
       clearTimeout(timeout);
       timeout = setTimeout(later, wait);
       if (callNow) func.apply(this, args);

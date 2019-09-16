@@ -1,6 +1,6 @@
 {
   "extends": ["google", "plugin:prettier/recommended"],
-  "plugins": ["prettier", "compat"],
+  "plugins": ["prettier"],
   "settings": {
     "polyfills": ["fetch", "promises"]
   },
@@ -20,7 +20,6 @@
   },
   "rules": {
     "strict": 0,
-    "compat/compat": 2,
     "require-jsdoc": 0,
     "quotes": 1,
     "global-require": "off",
@@ -81,6 +80,7 @@
       }
     ],
     "no-unused-vars": ["error", { "ignoreRestSiblings": true, "args": "none" }],
-    "camelcase": "off"
+    "camelcase": "off",
+    "prefer-promise-reject-errors": 0
   }
 }

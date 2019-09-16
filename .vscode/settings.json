@@ -1,10 +1,11 @@
 {
   "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
     "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/.ts": true,
+    "**/CVS": true,
     "node_modules": true
   },
   "eslint.packageManager": "yarn",
@@ -16,13 +17,14 @@
   "scss.validate": false,
   "editor.formatOnSave": true,
   "eslint.validate": ["javascript", "javascriptreact"],
-  "prettier.disableLanguages": ["js", "jsx"],
+  "prettier.disableLanguages": ["js", "jsx", "ts"],
   "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
     "editor.formatOnSave": false
   },
   "[javascriptreact]": {
     "editor.formatOnSave": false
-  },
-  "prettier.stylelintIntegration": true,
-  "prettier.eslintIntegration": true
+  }
 }
