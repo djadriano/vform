@@ -229,7 +229,7 @@ class VForm {
   [getErrorElement](containerEl) {
     let { classes } = this.defaults;
     const dataFieldContainer = containerEl.getAttribute('data-field-container');
-    const getErrorWithReference = containerEl.querySelector(`[data-reference-error="${dataFieldContainer}"]`);
+    const getErrorWithReference = this.form.querySelector(`[data-reference-error="${dataFieldContainer}"]`);
 
     return getErrorWithReference ? getErrorWithReference : containerEl.querySelector(`.${classes.errorElement}`);
   }
