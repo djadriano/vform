@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import 'stylesheets/index';
 
 import VForm from 'source/vform';
