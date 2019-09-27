@@ -13,13 +13,13 @@ See more about HTML validation attributes in:
 NPM:
 
 ```sh
-npm i @djadrianof/vform --saveDev
+npm i @djadrianof/vform
 ```
 
 Yarn:
 
 ```sh
-yarn add @djadrianof/vform -D
+yarn add @djadrianof/vform
 ```
 
 # Setup
